@@ -1,0 +1,185 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8">
+          <div class="col-md-12">
+            <h2 class="h1" ng-hide="$ctrl.mode !== 'editar'">Formulario Solicitudes</h2>
+            <h2 class="h1" ng-hide="$ctrl.mode !== 'view'">Datos de la Solicitud</h2>
+            <form name="formSolicitudes" class="form-group">
+                <div class="form-group col-md-4" ng-hide="$ctrl.mode !== 'editar'" ng-class="{ 'has-error' : formSolicitudes.nombre.$invalid && !formSolicitudes.nombre.$pristine, 'has-success': !focus &&  formSolicitudes.nombre.$valid}">
+                    <label for="nombre">Nombre <span class="glyphicon glyphicon-asterisk"></span> :</label>
+                    <input id="inputSuccess2" class="form-control has-success" name="nombre" required autofocus pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ.,;: 0-9]{0,}" aria-describedby="helpBlock2" ng-model="$ctrl.solicitud.nombre" ng-focus="focus=true" ng-blur="focus=false">
+                </div>
+
+                <div class="col-md-4" ng-hide="$ctrl.mode !== 'view'">
+                    <label>Nombre: </label>
+                    <span class="form-control">{{ $ctrl.solicitud.nombre }}</span>
+                </div>
+
+                <div class="form-group col-md-4" ng-hide="$ctrl.mode !== 'editar'" ng-class="{ 'has-error' : formSolicitudes.descripcion.$invalid && !formSolicitudes.descripcion.$pristine, 'has-success': !focus &&  formSolicitudes.descripcion.$valid}">
+                    <label for="descripcion">Descripcion :</label>
+                    <input id="inputSuccess2" class="form-control has-success" name="descripcion" autofocus pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ.,;: 0-9]{0,}" aria-describedby="helpBlock2" ng-model="$ctrl.solicitud.descripcion" ng-focus="focus=true" ng-blur="focus=false">
+                </div>
+
+                <div class="col-md-4" ng-hide="$ctrl.mode !== 'view'">
+                    <label>Descripción: </label>
+                    <span class="form-control">{{ $ctrl.solicitud.descripcion }}</span>
+                </div>
+
+                <div class="form-group col-md-4" ng-hide="$ctrl.mode !== 'editar'">
+                    <label>Fecha Recepción: </label>
+                    <input class="form-control" type="date" ng-model="$ctrl.solicitud.fechaRecibida" name="sFechaRecibida" placeholder="fechaRecibida" /><br />
+                </div>
+
+                <div class="col-md-4" ng-hide="$ctrl.mode !== 'view'">
+                    <label>Fecha Recepción: </label>
+                    <span class="form-control">{{ $ctrl.solicitud.fechaRecibida | date : shortDate}}</span>
+                </div>
+
+                <div class="form-group col-md-4" ng-hide="$ctrl.mode !== 'editar'" ng-class="{ 'has-error' : formSolicitudes.cliente.$invalid && !formSolicitudes.cliente.$pristine, 'has-success': !focus &&  formSolicitudes.cliente.$valid}">
+                    <label for="cliente">Cliente <span class="glyphicon glyphicon-asterisk"></span> :</label>
+                    <input id="inputSuccess2" class="form-control has-success" name="cliente" required autofocus pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ.,;: 0-9]{0,}" aria-describedby="helpBlock2" ng-model="$ctrl.solicitud.cliente" ng-focus="focus=true" ng-blur="focus=false">
+                </div>
+
+                <div class="col-md-4" ng-hide="$ctrl.mode !== 'view'">
+                    <label>Cliente: </label>
+                    <span class="form-control">{{ $ctrl.solicitud.cliente }}</span>
+                </div>
+
+                <div class="form-group col-md-4" ng-hide="$ctrl.mode !== 'editar'" ng-class="{ 'has-error' : formSolicitudes.brm.$invalid && !formSolicitudes.brm.$pristine, 'has-success': !focus &&  formSolicitudes.brm.$valid}">
+                    <label for="brm">BRM :</label>
+                    <input id="inputSuccess2" class="form-control has-success" name="brm" autofocus pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ.,;: 0-9]{0,}" aria-describedby="helpBlock2" ng-model="$ctrl.solicitud.brm" ng-focus="focus=true" ng-blur="focus=false">
+                </div>
+
+                <div class="col-md-4" ng-hide="$ctrl.mode !== 'view'">
+                    <label>BRM: </label>
+                    <span class="form-control">{{ $ctrl.solicitud.brm }}</span>
+                </div>
+
+                <div class="form-group col-md-4" ng-hide="$ctrl.mode !== 'editar'" ng-class="{ 'has-error' : formSolicitudes.adm.$invalid && !formSolicitudes.adm.$pristine, 'has-success': !focus &&  formSolicitudes.adm.$valid}">
+                    <label for="adm">ADM :</label>
+                    <input id="inputSuccess2" class="form-control has-success" name="adm" autofocus pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ.,;: 0-9]{0,}" aria-describedby="helpBlock2" ng-model="$ctrl.solicitud.adm" ng-focus="focus=true" ng-blur="focus=false">
+                </div>
+
+                <div class="col-md-4" ng-hide="$ctrl.mode !== 'view'">
+                    <label>ADM: </label>
+                    <span class="form-control">{{ $ctrl.solicitud.adm }}</span>
+                </div>
+
+                <div class="form-group col-md-4" ng-hide="$ctrl.mode !== 'editar'" ng-class="{ 'has-error' : formSolicitudes.consultorasContactadas.$invalid && !formSolicitudes.consultorasContactadas.$pristine, 'has-success': !focus &&  formSolicitudes.consultorasContactadas.$valid}">
+                    <label for="consultorasContactadas">consultorasContactadas :</label>
+                    <input id="inputSuccess2" class="form-control has-success" name="consultorasContactadas" autofocus pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ .,;: 0-9]{0,}" aria-describedby="helpBlock2" ng-model="$ctrl.solicitud.consultorasContactadas" ng-focus="focus=true" ng-blur="focus=false">
+                </div>
+
+                <div class="col-md-4" ng-hide="$ctrl.mode !== 'view'">
+                    <label>Consultoras contactadas: </label>
+                    <span class="form-control">{{ $ctrl.solicitud.consultorasContactadas }}</span>
+                </div>
+
+                <div class="col-md-4" ng-hide="$ctrl.mode !== 'editar'">
+                    <label for="consultorasContactadas">Estado :</label>
+                    <div class="btn-group" uib-dropdown ng-hide="$ctrl.mode !== 'editar'">
+                        <button type="button" class="btn btn-default" uib-dropdown-toggle>
+                        {{$ctrl.solicitud.estado}} <span class="caret"></span>
+                            <span class="sr-only">Split button!</span>
+                        </button>
+                        <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="split-button">
+                            <li role="menuitem" ng-repeat="estado in $ctrl.estados" value="{{estado}}" ng-selected="$ctrl.solicitud.estado === estado">
+                                <a href="#" ng-click="$ctrl.solicitud.estado = estado">{{estado}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-4" ng-hide="$ctrl.mode !== 'view'">
+                    <label>Estado: </label>
+                    <span class="form-control">{{ $ctrl.solicitud.estado }}</span>
+                </div>
+              </div><div class="col-md-12">
+                <div class="col-md-6" ng-hide="$ctrl.mode !== 'view'">
+                  <!-- <div class="col-md-offset-1"> -->
+                  <h4>Requisitos Obligatorios:</h4>
+                <!-- </div> -->
+                <div class="row" ng-repeat="requisitoObligatorio in $ctrl.listaRequisitosObligatorios">
+                  <div class="col-md-6">
+                    <span class="form-control">{{ requisitoObligatorio.caracteristica.nombre }}</span>
+                  </div>
+                  <div class="col-md-6">
+                    <span class="form-control">Nivel {{ requisitoObligatorio.nivel }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6" ng-hide="$ctrl.mode !== 'view'">
+                <!-- <div class="col-md-offset-1"> -->
+                <h4>Requisitos Deseables:</h4>
+              <!-- </div> -->
+                <div class="row" ng-repeat="requisitoDeseado in $ctrl.listaRequisitosDeseados">
+                  <div class="col-md-6">
+                    <span class="form-control">{{ requisitoDeseado.caracteristica.nombre }}</span>
+                  </div>
+                  <div class="col-md-6">
+                    <span class="form-control">Nivel {{ requisitoDeseado.nivel }}</span>
+                  </div>
+
+                </div>
+              </div>
+              </div>
+    </div>
+              <div class="col-md-4 sidebarCandidatos">
+                  <div class="row">
+                      <div class="col-md-12">
+                          <table class="table table-striped table-responsive marginless-bottom">
+                              <thead>
+                                  <tr>
+                                      <h3>Candidatos Recomendados</h3>
+                                  </tr>
+                              </thead>
+                              <tr class="candidatoSeleccionado">
+                                  <td class="rowCandidato">
+                                      <div ng-if="$ctrl.candidatoSeleccionado.id != null">
+                                          <span class="fa fa-star yellow-star"></span> <a ui-sref="app.candidatos-perfil({id:$ctrl.candidatoSeleccionado.id})">{{$ctrl.candidatoSeleccionado.nombre}} {{$ctrl.candidatoSeleccionado.apellido}}</a> <span class="badge">{{$ctrl.candidatoSeleccionado.points}}</span>
+                                      </div>
+                                      <div ng-if="$ctrl.candidatoSeleccionado.id == null" class="leyenda">
+                                          <span class="fa fa-star"></span> {{$ctrl.candidatoSeleccionado.nombre}}
+                                      </div>
+                                      <button ng-click="$ctrl.setCandidatoSelect(null)" class="btn btn-xs btn-danger glyphicon glyphicon-minus"></button>
+                                  </td>
+                              </tr>
+                              <tr ng-repeat="candidato in $ctrl.candidatos | orderBy : '-points' | limitTo: 9 : ($ctrl.currentPage-1)*$ctrl.maxSize">
+                                  <td class="rowCandidato">
+                                      <div>
+                                          <a ui-sref="app.candidatos-perfil({id:candidato.id})">{{candidato.nombre}} {{candidato.apellido}}</a> <span class="badge">{{candidato.points}}</span>
+                                      </div>
+                                      <button ng-click="$ctrl.setCandidatoSelect(candidato.id)" class="btn btn-xs btn-primary glyphicon glyphicon-plus"></button>
+                                  </td>
+                              </tr>
+                          </table>
+                          <div class="pagination">
+                              <ul uib-pagination total-items="$ctrl.candidatos.length" ng-model="$ctrl.currentPage" max-size="0" class="pagination-sm" boundary-link-numbers="false"></ul>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+</div>
+                    <div class="form-group col-md-offset-9" ng-if="$ctrl.mode === 'editar'">
+                      <br><br>
+                        <button type="button" ng-click="$ctrl.reset()" value="Descartar cambios" class="reset btn btn-default ">
+                            Descartar Cambios <span class ="glyphicon glyphicon-remove"></span>
+                        </button>
+                        <button type="submit" ng-click="$ctrl.updateOrCreate($ctrl.solicitud, formSolicitudes)" ng-disabled="formSolicitudes.$invalid" class="submit btn btn-primary">
+                            Guardar <span class="glyphicon glyphicon-send"></span>
+                        </button>
+                    </div>
+                    <div class="form-group col-md-12"></div>
+                    <div class="form-group col-md-offset-11" ng-if="$ctrl.mode === 'view'">
+                        <button type="submit" ng-click="$ctrl.changeMode()" ng-disabled="formSolicitudes.$invalid || formContacto.$invalid" class="submit btn btn-primary">
+                            Editar&nbsp;&nbsp; <span class="glyphicon glyphicon-pencil"></span>
+                        </button>
+                    </div>
+                    <br>
+                    <p class="col-md-12" ng-hide="$ctrl.mode !== 'editar'">
+                        Los campos con el simbolo <span class="glyphicon glyphicon-asterisk"></span> son obligatorios.
+                    </p>
+            </form>
+        </div>
+
+</div>

@@ -1,0 +1,63 @@
+<div class="container-fluid">
+    <h1 class="h1">Lista de solicitudes</h1>
+
+    <div class="row form-group">
+        <div class="col-md-offset-6 col-sm-offset-3 col-md-5 col-sm-7 col-xs-9">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+            <input class="form-control" ng-init="orderByColumn = undefined; orderReverse = false;" ng-model="$ctrl.filtro" ng-change="$ctrl.actualizarArraySolicitudes()" placeholder="Buscar" />
+          </div>
+        </div>
+        <div class="col-sm-1 col-xs-1">
+
+            <a ui-sref="app.solicitudesForm({id: 0,mode: 'editar'})"><button  type="button" class="btn btn-primary">Nuevo <span class="glyphicon glyphicon-plus"></span></button></a>
+
+        </div>
+    </div>
+
+    <table class="table table-responsive table-striped">
+        <thead>
+            <tr ng-init="$ctrl.orderByPropiedad=''; cabeceras=['id','nombre','cliente']">
+                <th ng-repeat="cabecera in cabeceras" ng-click="$ctrl.orderByPropiedad == cabecera ? $ctrl.orderReverse = !$ctrl.orderReverse : $ctrl.orderReverse = false; $ctrl.reverse=$ctrl.orderReverse ? '-':''; $ctrl.orderByPropiedad=cabecera">
+                    <span>{{cabecera.split('_').join(' ')}}</span>
+                    <span class="glyphicon" ng-class="$ctrl.orderByPropiedad != cabecera ? 'glyphicon-sort' : ($ctrl.orderReverse ? 'glyphicon-sort-by-attributes-alt' : 'glyphicon-sort-by-attributes')"></span>
+                </th>
+                <th class="hidden-xs">Descripción</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tr ng-repeat="elem in $ctrl.arrayFiltrado | orderBy : ($ctrl.reverse+$ctrl.orderByPropiedad) | limitTo : 10 : ($ctrl.currentPage-1)*$ctrl.maxSize track by elem.id">
+            <td>
+                {{ elem.id }}
+            </td>
+            <td>
+                {{ elem.nombre }}
+            </td>
+            <td>
+                {{ elem.cliente }}
+            </td>
+            <td class="hidden-xs">
+                {{ elem.descripcion }}
+            </td>
+            <td>
+                <!-- boton con dropdown -->
+                <div class="btn-group" uib-dropdown>
+                    <button ui-sref="app.solicitudesForm({id: elem.id,mode: 'view'})" id="split-button" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span></button>
+                    <button type="button" class="btn btn-primary" uib-dropdown-toggle>
+                <span class="caret"></span>
+              </button>
+                    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="split-button">
+                        <li role="menuitem"><a ui-sref="app.solicitudesForm({id: elem.id,mode: 'view'})"><span class="glyphicon glyphicon-eye-open"></span> Ver</a></li>
+                        <li role="menuitem"><a ui-sref="app.solicitudesForm({id: elem.id,mode: 'editar'})"><span class="glyphicon glyphicon-edit"></span> Editar</a></li>
+                        <li class="divider"></li>
+                        <li role="menuitem"><a href="#" ng-click="$ctrl.openComponentModal(elem.id)"><span class="glyphicon glyphicon-trash"></span> Eliminar</a></li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <div class="pagination">
+        <ul uib-pagination total-items="$ctrl.arrayFiltrado.length" ng-model="$ctrl.currentPage" max-size="5" class="pagination-sm" boundary-link-numbers="true"></ul>
+    </div>
+</div>

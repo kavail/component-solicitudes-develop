@@ -1,0 +1,85 @@
+<div class= "container-fluid">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="input-group">
+        <input class="form-control" ng-model="$ctrl.filtro" ng-change="$ctrl.actualizarSolicitudes()" placeholder="Buscar" />
+        <span class="buscador input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+      </div>
+    </div>
+  </div>
+  </center>
+  <div id="contendorListas" class="row draganddropSolicitudes">
+    <div class="col-sm-4 columnaFiltrada">
+      <h3>Solicitudes abiertas <span class="glyphicon glyphicon-ok-circle"></span></h3>
+      <ul class="list-group" ui-on-Drop="$ctrl.onDrop($event,$data,$ctrl.arrayFiltrado,'abierta')">
+        <li drag-channel="A" drop-channel="A" drop-validate="$ctrl.dropValidate($data,'abierta')"
+          ng-repeat="elem in $ctrl.arrayFiltrado | filter:{ estado:'abierta'} | filter: $ctrl.filtro track by $index">
+          <div class="list-group-item solicitudFiltrada">
+            <h4 class="tituloSolicitudAbierta"><a class="leyenda" ui-sref="app.solicitudesForm({id: elem.id,mode: 'view'})">{{elem.nombre}}</a></span><span class="glyphicon glyphicon-align-justify drag-and-drop"
+            ui-draggable="true"
+            drag="elem"
+            on-drop-success="$ctrl.dropSuccessHandler($event,$ctrl.arrayFiltrado.indexOf(elem),$ctrl.arrayFiltrado)"></span></h4>
+            <hr />
+            <h5><span class="glyphicon glyphicon-briefcase"></span><b> Cliente:</b> <span class="leyenda">{{elem.cliente}}</span></h5>
+            <h5><span class="glyphicon glyphicon-user"></span><b> Candidato:</b> <span class="leyenda"><a ui-sref="app.candidatos-perfil({id:elem.candidato.id,mode:'view'})">{{ elem.candidato.nombre + ' ' + elem.candidato.apellido}}</a> </span></h5>
+            <div ng-repeat = "contacto in elem.candidato.contactos">
+              <h5 ng-if="contacto.tipo == 'Teléfono'"><span class="glyphicon glyphicon-earphone"></span><b> Telefono:</b> <span class="leyenda">{{contacto.valor}}</span></h5>
+              <h5 ng-if="contacto.tipo == 'Correo' "><span class="glyphicon glyphicon-envelope"></span><b> Correo:</b> <span class="leyenda">{{contacto.valor}}</span></h5>
+              <h5 ng-if="contacto.tipo == 'LinkedIn'"><span class="fa fa-linkedin"></span><b> LinkedIn:</b> <span class="leyenda">{{contacto.valor}}</span></h5>
+            </div>
+          </div>
+          <br />
+          <br />
+        </li>
+      </ul>
+    </div>
+    <div dnd-list="list" class="col-sm-4 columnaFiltrada">
+      <h3>Solicitudes en espera <span class="glyphicon glyphicon-hourglass"></span></h3>
+      <ul class="list-group" ui-on-Drop="$ctrl.onDrop($event,$data,$ctrl.arrayFiltrado,'standby')">
+        <li drag-channel="A" drop-channel="A" drop-validate="$ctrl.dropValidate($data,'standby')"
+          ng-repeat="elem in $ctrl.arrayFiltrado | filter:{ estado:'standby'} | filter: $ctrl.filtro track by $index">
+          <div class="list-group-item solicitudFiltrada">
+            <h4 class="tituloSolicitudEspera"><a class="leyenda" ui-sref="app.solicitudesForm({id: elem.id,mode: 'view'})">{{elem.nombre}}</a></span><span class="glyphicon glyphicon-align-justify drag-and-drop"
+            ui-draggable="true"
+            drag="elem"
+            on-drop-success="$ctrl.dropSuccessHandler($event,$ctrl.arrayFiltrado.indexOf(elem),$ctrl.arrayFiltrado)"></span></h4>
+            <hr />
+            <h5><span class="glyphicon glyphicon-briefcase"></span><b> Cliente:</b> <span class="leyenda">{{elem.cliente}}</span></h5>
+            <h5><span class="glyphicon glyphicon-user"></span><b> Candidato:</b> <span class="leyenda"><a ui-sref="app.candidatos-perfil({id:elem.candidato.id,mode:'view'})">{{ elem.candidato.nombre + ' ' + elem.candidato.apellido}}</a></span></h5>
+            <div ng-repeat = "contacto in elem.candidato.contactos">
+              <h5 ng-if="contacto.tipo == 'Teléfono'"><span class="glyphicon glyphicon-earphone"></span><b> Telefono:</b> <span class="leyenda">{{contacto.valor}}</span></h5>
+              <h5 ng-if="contacto.tipo == 'Correo' "><span class="glyphicon glyphicon-envelope"></span><b> Correo:</b> <span class="leyenda">{{contacto.valor}}</span></h5>
+              <h5 ng-if="contacto.tipo == 'LinkedIn'"><span class="fa fa-linkedin"></span><b> LinkedIn:</b> <span class="leyenda">{{contacto.valor}}</span></h5>
+            </div>
+          </div>
+          <br />
+          <br />
+        </li>
+      </ul>
+    </div>
+    <div dnd-list="list" class="col-sm-4">
+      <h3>Solicitudes cerradas <span class="glyphicon glyphicon-ban-circle"></span></h3>
+      <ul class="list-group" ui-on-Drop="$ctrl.onDrop($event,$data,$ctrl.arrayFiltrado,'cerrada')">
+        <li drag-channel="A" drop-channel="A" drop-validate="$ctrl.dropValidate($data,'cerrada')"
+          ng-repeat="elem in $ctrl.arrayFiltrado | filter:{ estado: 'cerrada'} | filter: $ctrl.filtro track by $index">
+          <div class="list-group-item solicitudFiltrada">
+            <h4 class="tituloSolicitudCerrada"><a class="leyenda" ui-sref="app.solicitudesForm({id: elem.id,mode: 'view'})">{{elem.nombre}}</a></span><span class="glyphicon glyphicon-align-justify drag-and-drop"
+            ui-draggable="true"
+            drag="elem"
+            on-drop-success="$ctrl.dropSuccessHandler($event,$ctrl.arrayFiltrado.indexOf(elem),$ctrl.arrayFiltrado)"></span></h4>
+            <hr />
+            <h5><span class="glyphicon glyphicon-briefcase"></span><b> Cliente:</b> <span class="leyenda">{{elem.cliente}}</span></h5>
+            <h5><span class="glyphicon glyphicon-user"></span><b> Candidato:</b> <span class="leyenda"><a ui-sref="app.candidatos-perfil({id:elem.candidato.id,mode:'view'})">{{ elem.candidato.nombre + ' ' + elem.candidato.apellido}}</a></span></h5>
+            <div ng-repeat = "contacto in elem.candidato.contactos">
+              <h5 ng-if="contacto.tipo == 'Teléfono'"><span class="glyphicon glyphicon-earphone"></span><b> Telefono:</b> <span class="leyenda">{{contacto.valor}}</span></h5>
+              <h5 ng-if="contacto.tipo == 'Correo' "><span class="glyphicon glyphicon-envelope"></span><b> Correo:</b> <span class="leyenda">{{contacto.valor}}</span></h5>
+              <h5 ng-if="contacto.tipo == 'LinkedIn'"><span class="fa fa-linkedin"></span><b> LinkedIn:</b> <span class="leyenda">{{contacto.valor}}</span></h5>
+            </div>
+          </div>
+          <br />
+          <br />
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
